@@ -67,9 +67,17 @@ else(GDAL_USE_LIBJPEG_INTERNAL)
 	endif(JPEG_FOUND) 
 endif(GDAL_USE_LIBJPEG_INTERNAL)
 
+option(GDAL_USE_LIBGEOTIFF_INTERNAL "Set ON to use internal libgeotiff" OFF)
+if(GDAL_USE_LIBGEOTIFF_INTERNAL)	
 include_directories(${GDAL_ROOT_SOURCE_DIR}/frmts/gtiff/libgeotiff)    
 add_subdirectory(${GDAL_ROOT_SOURCE_DIR}/frmts/gtiff/libgeotiff ${GDAL_ROOT_BINARY_DIR}/frmts/gtiff/libgeotiff)	
-	
+else(GDAL_USE_LIBGEOTIFF_INTERNAL)
+	find_package(geotiff REQUIRED)
+	if(geotiff_FOUND)
+		include_directories(${geotiff_INCLUDE_DIR})
+	endif(geotiff_FOUND) 
+endif(GDAL_USE_LIBGEOTIFF_INTERNAL)
+
 set(LIB_HHEADERS
 	gtiff.h
 	gt_citation.h
@@ -106,5 +114,10 @@ endif(TIFF_FOUND)
 if(JPEG_FOUND)
 	set(GDAL_TARGET_LINK_LIB ${GDAL_TARGET_LINK_LIB} ${JPEG_LIBRARIES})
 endif(JPEG_FOUND)
+
+if(geotiff_FOUND)
+	set(GDAL_TARGET_LINK_LIB ${GDAL_TARGET_LINK_LIB} ${geotiff_LIBRARY})
+	#set(GDAL_TARGET_LINK_LIB ${GDAL_TARGET_LINK_LIB} ${xtiff_LIBRARY})
+endif(geotiff_FOUND)
 
 set(GDAL_TARGET_LINK_LIB ${GDAL_TARGET_LINK_LIB} PARENT_SCOPE)

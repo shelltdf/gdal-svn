@@ -17,7 +17,9 @@
 #if defined(_MSC_VER) && (_MSC_VER < 1500)
 #  define vsnprintf _vsnprintf
 #endif
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
 #define snprintf _snprintf
+#endif
 
 #define HAVE_GETCWD 1
 /* gmt_notunix.h from GMT project also redefines getcwd. See #3138 */
@@ -74,7 +76,7 @@
 #define ICONV_CONST @ICONV_CONST@
 
 /* For .cpp files, define as const if the declaration of iconv() needs const. */
-//#undef ICONV_CPP_CONST
+#define ICONV_CPP_CONST
 
 /* The size of a `int', as computed by sizeof. */
 #define SIZEOF_INT 4

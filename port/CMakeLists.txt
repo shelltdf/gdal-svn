@@ -358,7 +358,8 @@ endif(GDAL_USE_CURL)
 option(GDAL_USE_ICONV "Set ON to use libiconv" ON)
 if(GDAL_USE_ICONV)
     include_directories(${ICONV_INCLUDE_DIR})
-	add_definitions(-DHAVE_ICONV -DLIBICONV_PLUG)
+	# add_definitions(-DHAVE_ICONV -DLIBICONV_PLUG)
+	add_definitions(-DHAVE_ICONV)
 endif(GDAL_USE_ICONV)
 
 #check odbc
