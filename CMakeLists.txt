@@ -88,7 +88,7 @@ endif(UNIX)
 
 if(MSVC)
     if(CMAKE_CL_64)
-        set_target_properties(${GDAL_LIB_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x64")
+        # set_target_properties(${GDAL_LIB_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x64")
         add_definitions(-D_WIN64)
     endif(CMAKE_CL_64)
 endif(MSVC)
@@ -152,8 +152,7 @@ set_target_properties(${GDAL_LIB_NAME}
 	ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-	
-
+	
 if(WIN32)
     if(CMAKE_CL_64)
         install(TARGETS ${GDAL_LIB_NAME}
